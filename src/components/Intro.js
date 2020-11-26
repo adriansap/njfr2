@@ -4,10 +4,11 @@ import React, { useState } from "react";
 import { Redirect } from 'react-router-dom'
 import { Link } from "react-router-dom";
 
+
 function Intro() {
     return (
         <div>
-            <Link to="/List"><th scope="col">Restaurant Managers |</th> </Link><Link to="/"><th>Job Seekers</th></Link>
+            {/* <Link to="/List"><th scope="col">Restaurant Managers |</th> </Link><Link to="/"><th>Job Seekers</th></Link> */}
 
             <h1> New Jersey For Rent .COM</h1>
 
