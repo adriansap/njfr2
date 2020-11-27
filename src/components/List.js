@@ -35,11 +35,11 @@ function List(props) {
             <th scope="col">#</th>
             <th scope="col">Image</th>
             <Link to="/Orderalpha">
-              <th scope="col">Name</th>
+              <th scope="col">Address</th>
             </Link>
-            <th scope="col">Phone</th>
-            <th scope="col">Email</th>
-            <th scope="col">Location</th>
+            <th scope="col">Monthly rent</th>
+            <th scope="col">Contact info</th>
+            <th scope="col">Description</th>
 
           </tr>
         </thead>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import _ from 'lodash';
 // import Orderalpha from './Orderalpha'
 import { Redirect } from 'react-router-dom'
@@ -13,7 +13,8 @@ function Intro() {
             <h1> New Jersey For Rent .COM</h1>
 
             <p>Coming out of state and looking to relocate to Garden State? Look no further.</p>
-            <Link to="/List"><th scope="col">Search our listings</th> </Link>         
+            <Link to="/List"><th scope="col">Search our listings</th> </Link>  
+            <Link to="/Stripecode"><th scope="col">Purchase Application For Rental</th></Link>       
 {/*             
                <form action="https://submit-form.com/GGCaFc40HpAj2r4OPjTVd" target="_self">
 

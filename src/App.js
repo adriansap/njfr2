@@ -6,6 +6,7 @@ import List from "./components/List";
 // import Wrapper from "./components/Wrapper";
 import Employees from "./employees";
 import Intro from "./components/Intro";
+import Stripecode from "./components/stripecode"
 
 // var employees = [
 //   {
@@ -68,6 +69,7 @@ function App() {
         <Route exact path="/" render={() => <Intro employees={Employees} />} />
         <Route exact path="/Orderalpha" render={() => <Orderalpha employees={Employees} />} />
         <Route exact path="/List" render={() => <List employees={Employees} />} />
+        <Route exact path="/Stripecode" render={() => <Stripecode employees={Employees} />} />
         {/* </Wrapper> */}
       </div>
     </Router>
