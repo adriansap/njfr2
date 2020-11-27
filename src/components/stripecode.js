@@ -13,8 +13,8 @@ const ProductDisplay = ({ handleClick }) => (
         alt="The cover of Stubborn Attachments"
       />
       <div className="description">
-        <h3>Stubborn Attachments</h3>
-        <h5>$20.00</h5>
+        <h3>Application For Rental</h3>
+        <h5>$45.00</h5>
       </div>
     </div>
     <button id="checkout-button" role="link" onClick={handleClick}>

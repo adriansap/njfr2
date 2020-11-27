@@ -1,80 +1,76 @@
+import React, { useState, useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import "./App.css";
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe("pk_test_51Hru70J2ghZ1W574C7GsOENxyPiovQsF5xQcuWgWxXj5cTufAVcV6BfZVA2yPt3yUBC7AzmRUq5koxqZC9KiuR4e00iPVYD9pz");
 
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Orderalpha from "./components/Orderalpha";
-import List from "./components/List";
-// import Wrapper from "./components/Wrapper";
-import Employees from "./employees";
-import Intro from "./components/Intro";
-import Stripecode from "./components/stripecode"
-
-// var employees = [
-//   {
-//     id: 1,
-//     image: "http://www.placehold.it/150x150",
-//     name: "Suzy Gonzales",
-//     phone: "(839)-497-9833",
-//     email: "suzy.g@example.com",
-//     DOB: "01-19-1986"
-//   },
-//   {
-//     id: 2,
-//     image: "http://placehold.it/150x150",
-//     name: "Patty Smith",
-//     phone: "(839)-127-3333",
-//     email: "patty.s@example.com",
-//     DOB: "02-20-1986"
-//   },
-//   {
-//     id: 3,
-//     image: "http://placehold.it/150x150",
-//     name: "Ursula Gomez",
-//     phone: "(839)-444-4833",
-//     email: "ursula.g@example.com",
-//     DOB: "03-21-1986"
-//   },
-//   {
-//     id: 4,
-//     image: "http://placehold.it/150x150",
-//     name: "Joan Petty",
-//     phone: "(839)-417-2833",
-//     email: "joan.p@example.com",
-//     DOB: "04-22-1986"
-//   },
-//   {
-//     id: 5,
-//     image: "http://placehold.it/150x150",
-//     name: "Trisha Wall",
-//     phone: "(839)-797-0833",
-//     email: "trisha.w@example.com",
-//     DOB: "05-10-1986"
-//   }
-
-// ];
-
-// function App() {
-//   return <List employees={employees} />;
-// }
-
-
-
-
-function App() {
-  console.log("sc",Employees)
-  document.title = "Employee Directory";
-  return (
-    <Router>
-      <div>
-        {/* <Wrapper> */}
-        <Route exact path="/" render={() => <Intro employees={Employees} />} />
-        <Route exact path="/Orderalpha" render={() => <Orderalpha employees={Employees} />} />
-        <Route exact path="/List" render={() => <List employees={Employees} />} />
-        <Route exact path="/Stripecode" render={() => <Stripecode employees={Employees} />} />
-        {/* </Wrapper> */}
+const ProductDisplay = ({ handleClick }) => (
+  <section>
+    <div className="product">
+      <img
+        src="https://res.cloudinary.com/dejaksfsk/image/upload/v1606494249/elite_intriago_logo_wnbyi3.png"
+        alt="EIR logo"
+      />
+      <div className="description">
+        <h3>Application For Rental</h3>
+        <h5>$45.00</h5>
       </div>
-    </Router>
+    </div>
+    <button id="checkout-button" role="link" onClick={handleClick}>
+      Checkout
+    </button>
+  </section>
+);
+
+const Message = ({ message }) => (
+  <section>
+    <p>{message}</p>
+  </section>
+);
+
+export default function App() {
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("success")) {
+      setMessage("Order placed! You will receive an email confirmation.");
+    }
+
+    if (query.get("canceled")) {
+      setMessage(
+        "Order canceled -- continue to shop around and checkout when you're ready."
+      );
+    }
+  }, []);
+
+  const handleClick = async (event) => {
+    const stripe = await stripePromise;
+
+    const response = await fetch("/create-session", {
+      method: "POST",
+    });
+
+    const session = await response.json();
+
+    // When the customer clicks on the button, redirect them to Checkout.
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `result.error.message`.
+    }
+  };
+
+  return message ? (
+    <Message message={message} />
+  ) : (
+    <ProductDisplay handleClick={handleClick} />
   );
 }
-
-
-export default App;

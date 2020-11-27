@@ -1,27 +1,27 @@
 {
-  "name": "my-app",
+  "name": "stripe-sample",
   "version": "0.1.0",
-  "engines": {
-    "node": "12.14.1"
-  },
-  "private": true,
   "dependencies": {
+    "@stripe/react-stripe-js": "^1.0.0",
     "@stripe/stripe-js": "^1.11.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.2",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
-    "stripe": "^8.126.0"
+    "concurrently": "4.1.2",
+    "express": "^4.17.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-scripts": "^3.4.4",
+    "strip": "^3.0.0",
+    "stripe": "^7.63.1",
+    "yarn": "^1.22.10"
   },
+  "homepage": "http://localhost:3000/checkout",
+  "proxy": "http://localhost:4242",
   "scripts": {
-    "start": "react-scripts start",
+    "start-client": "react-scripts start",
+    "start-server": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "concurrently \"yarn start-client\" \"yarn start-server\""
   },
   "eslintConfig": {
     "extends": "react-app"
