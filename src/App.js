@@ -9,7 +9,7 @@ const ProductDisplay = ({ handleClick }) => (
   <section>
     <div className="product">
       <img
-        src="https://i.imgur.com/EHyR2nP.png"
+        src="https://res.cloudinary.com/dejaksfsk/image/upload/v1606494249/elite_intriago_logo_wnbyi3.png"
         alt="EIR logo"
       />
       <div className="description">
